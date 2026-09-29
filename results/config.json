@@ -1,0 +1,50 @@
+{
+  "python": "3.14.3",
+  "numpy": "2.5.2",
+  "matplotlib": "3.10.9",
+  "steps": 600,
+  "calibration_seeds": [
+    0,
+    9
+  ],
+  "evaluation_seeds": [
+    1000,
+    1099
+  ],
+  "ewma_alpha": {
+    "Calm market": 0.14,
+    "Noisy quotes": 0.06999999999999999,
+    "Sudden jump": 0.22,
+    "Missing quotes": 0.15000000000000002
+  },
+  "markets": [
+    {
+      "name": "Calm market",
+      "process_std": 0.15,
+      "quote_std": 1.0,
+      "jump": 0.0,
+      "gaps": false
+    },
+    {
+      "name": "Noisy quotes",
+      "process_std": 0.15,
+      "quote_std": 2.5,
+      "jump": 0.0,
+      "gaps": false
+    },
+    {
+      "name": "Sudden jump",
+      "process_std": 0.15,
+      "quote_std": 1.0,
+      "jump": 5.0,
+      "gaps": false
+    },
+    {
+      "name": "Missing quotes",
+      "process_std": 0.15,
+      "quote_std": 1.0,
+      "jump": 0.0,
+      "gaps": true
+    }
+  ]
+}
