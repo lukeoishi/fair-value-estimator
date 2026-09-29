@@ -77,3 +77,7 @@ A noisy quote gets less weight. An uncertain estimate gets corrected more strong
 The core filter is about 25 lines. The rest generates data, evaluates the baselines and draws the figure. This is a statistical estimation project, not neural-network training. There are no earnings, order books, bid–ask bounce, transaction costs or profit claims. A useful next experiment would estimate Q and R from observations and test sensitivity to wrong assumptions.
 
 Background: [Welch and Bishop, An Introduction to the Kalman Filter](https://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf).
+
+## ITA harmonic forecasting experiment
+
+[Recent-weighted sine-wave model](HARMONIC.md): a constant plus phase-shifted sine waves, tested on historical ITA prices. The later-period prediction error was worse than the last-close baseline; the code and negative result are retained for comparison.
