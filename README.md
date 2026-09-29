@@ -81,3 +81,7 @@ Background: [Welch and Bishop, An Introduction to the Kalman Filter](https://www
 ## ITA harmonic forecasting experiment
 
 [Recent-weighted sine-wave model](HARMONIC.md): a constant plus phase-shifted sine waves, tested on historical ITA prices. The later-period prediction error was worse than the last-close baseline; the code and negative result are retained for comparison.
+
+## Linear and quadratic return forecasts
+
+[ITA regression experiment](REGRESSION.md): three recent-return inputs, ordinary least squares, chronological validation and a zero-return baseline. The quadratic model won validation but did not beat the baseline on the later period. Includes reproducible fitted coefficients and per-date predictions.
