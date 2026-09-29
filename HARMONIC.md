@@ -35,3 +35,9 @@ This is a retrospective experiment. The later period was already explored in pre
 The model is simple enough to understand, but these results do not support using it to predict ITA. A periodic curve can fit recent prices while extrapolating poorly.
 
 ![Forecast comparison](results/harmonic/forecast.png)
+
+## Ten-wave follow-up
+
+Run with `--ten-waves --output results/harmonic-ten`. This keeps the original experiment intact. It uses 504 preceding observations and ten fixed periods: `252/k` trading days for k from 1 to 10 (252 down to 25.2 days). These are a simple harmonic basis, not evidence of annual market cycles. The 21 coefficients are fitted daily, with no trend or regularisation. Calibration chooses among half-lives of 20, 60, 120 and 252 trading days.
+
+Calibration selected 20 days. On the same 1,181 later observations, normalised RMSE was **1.8568%**, versus **1.2813%** for the last-close baseline: **44.9% higher error** (conditional block-bootstrap interval: 37.7–52.8% higher). This is better than the first harmonic experiment but still substantially worse than the baseline. Both the window and the waves changed, so the difference cannot be attributed solely to adding waves. This is further exploratory reuse of the same later period, not fresh independent confirmation.

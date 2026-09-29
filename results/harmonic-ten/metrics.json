@@ -1,0 +1,30 @@
+{
+  "periods": [
+    252.0,
+    126.0,
+    84.0,
+    63.0,
+    50.4,
+    42.0,
+    36.0,
+    31.5,
+    28.0,
+    25.2
+  ],
+  "half_life": 20,
+  "window": 504,
+  "calibration": "2018\u20132021",
+  "test_start": "2022-01-03",
+  "test_end": "2026-09-17",
+  "observations": 1181,
+  "model_rmse_pct": 1.8568211658336287,
+  "baseline_rmse_pct": 1.2812739303150298,
+  "improvement_pct": -44.91992086166052,
+  "improvement_95pct_ci": [
+    -52.773795428770114,
+    -37.69546824721873
+  ],
+  "source_sha256": "261394166e9e8c8616b68c517d219c550453bd4f36f7f1fd8422326cb968ef13",
+  "metric": "RMSE of next-close error divided by previous adjusted close",
+  "limitation": "Retrospective test, already explored in previous projects; not an untouched holdout."
+}

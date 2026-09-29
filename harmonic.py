@@ -48,7 +48,7 @@ def walk_forward(prices, periods, half_life, window=120):
     return prediction
 
 
-def run(source, output):
+def run(source, output, ten_waves=False):
     with source.open() as handle:
         rows = list(csv.DictReader(handle))
     dates = np.array([r['Date'] for r in rows])
@@ -61,9 +61,12 @@ def run(source, output):
         raise ValueError('Need at least 100 observations in each evaluation period.')
     previous = np.roll(prices, 1)
     trials = []
-    for periods in [(60,), (120,), (20, 60)]:
-        for half_life in [10, 30, 60]:
-            predicted = walk_forward(prices, periods, half_life)
+    window = 504 if ten_waves else 120
+    period_sets = [tuple(252 / k for k in range(1, 11))] if ten_waves else [(60,), (120,), (20, 60)]
+    half_lives = [20, 60, 120, 252] if ten_waves else [10, 30, 60]
+    for periods in period_sets:
+        for half_life in half_lives:
+            predicted = walk_forward(prices, periods, half_life, window)
             error = (predicted - prices) / previous
             score = float(np.sqrt(np.mean(error[calibration] ** 2)))
             trials.append((score, periods, half_life, predicted))
@@ -78,7 +81,7 @@ def run(source, output):
     indices = (starts[:, :, None] + np.arange(20)).reshape(2000, -1)[:, :n]
     improvements = 100 * (1 - np.sqrt(e[indices].mean(1) / b[indices].mean(1)))
     output.mkdir(parents=True, exist_ok=True)
-    summary = dict(periods=list(periods), half_life=half_life, window=120,
+    summary = dict(periods=list(periods), half_life=half_life, window=window,
         calibration='2018–2021', test_start=dates[test][0], test_end=dates[test][-1],
         observations=int(test.sum()), model_rmse_pct=100*model_rmse,
         baseline_rmse_pct=100*baseline_rmse,
@@ -111,5 +114,6 @@ if __name__ == '__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data',required=True,type=Path)
     parser.add_argument('--output',type=Path,default=Path('results/harmonic'))
+    parser.add_argument("--ten-waves", action="store_true", help="Use ten fixed annual harmonics and a 504-day window.")
     args=parser.parse_args()
-    run(args.data,args.output)
+    run(args.data,args.output,args.ten_waves)
