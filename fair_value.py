@@ -161,7 +161,7 @@ def run(output, repeats):
                              "interval_coverage": float(np.mean(np.abs(estimate - value)
                                  <= 1.96 * np.sqrt(variance))) if name == "Kalman" else ""})
     with (output / "runs.csv").open("w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     lines = ["# Evaluation", "", f"Mean RMSE across {repeats} evaluation paths per scenario. Lower is better.", "",
